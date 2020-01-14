@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using Valve.VR.Extras;
 
 public class MoveCannon : MonoBehaviour
 {
     float speed = 10;
     float firespeed = 10;
-    public float rotationZ;
     public GameObject bulletPrefab;
     public GameObject spawnPoint;
     private float nextFire;
     public float fireRate;
     int fired;
     private GameObject bullet;
-    public GlobalCounter globalCounter;
     public Button draw;
     public Button fire;
+    public SteamVR_LaserPointer laserPointer;
+  
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        //laserPointer.PointerClick += FireBullet;
+        //laserPointer.PointerClick += drawPrediction;
+    }
     void Start()
     {
         bulletPrefab.transform.localScale = new Vector3(0.2f,0.15f,0.15f);
@@ -29,7 +37,7 @@ public class MoveCannon : MonoBehaviour
     // Update is called once per frame1
     void Update()
     {
-        Rotate();
+        
         //FireBullet();
         //drawPrediction();
         ChangeBullet();
@@ -37,38 +45,10 @@ public class MoveCannon : MonoBehaviour
 
     }
 
-    void Rotate()
+
+    public void FireBullet(/*object sender, PointerEventArgs e*/)
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-
-            this.transform.Rotate(Vector3.back * speed * Time.deltaTime);
-            
-
-            Vector3 currentRotation = transform.localRotation.eulerAngles;
-            currentRotation.z = Mathf.Clamp(currentRotation.z, 75.0f, 95.0f);
-            transform.localRotation = Quaternion.Euler(currentRotation);
-
-        }
-
-        else if (Input.GetKey(KeyCode.S))
-        {
-            this.transform.Rotate(Vector3.forward * speed * Time.deltaTime);
-
-            Vector3 currentRotation = transform.localRotation.eulerAngles;
-            currentRotation.z = Mathf.Clamp(currentRotation.z, 75.0f, 95.0f);
-            transform.localRotation = Quaternion.Euler(currentRotation);
-        }
-
-        
-
-    }
-
-
-
-    public void FireBullet()
-    {
-        if(Time.time > nextFire)
+        if(Time.time > nextFire /*&& e.target.name == "Fire"*/)
         {
 
             nextFire = Time.time + fireRate;
@@ -105,11 +85,12 @@ public class MoveCannon : MonoBehaviour
         }
     }
 
-   public void drawPrediction()
+   public void drawPrediction(/*object sender, PointerEventArgs e*/)
     {
-       
+       // if (e.target.name == "Load")
+        //{
             DrawTraject(spawnPoint.transform.position, new Vector3(transform.up.x * firespeed, transform.up.y * firespeed, transform.up.z * firespeed), Physics.gravity);
-        
+        //}
             
     }
 

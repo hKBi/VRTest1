@@ -1,41 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveTower : MonoBehaviour
 {
-    int speed = 10;
+
+    public GameObject tower;
+    public Slider slider;
+
+    float prevrotation;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        this.slider.onValueChanged.AddListener(this.Rotate);
+
+        this.prevrotation = this.slider.value;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Rotate(float rotation)
     {
-        Rotate();
-    }
+        float delta = rotation - this.prevrotation;
+        this.tower.transform.Rotate(Vector3.up * delta * 180);
 
-    void Rotate()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.transform.Rotate(Vector3.up * speed * Time.deltaTime);
+        this.prevrotation = rotation;
 
-            
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.transform.Rotate(Vector3.down * speed * Time.deltaTime);
-
-           
-        }
-
-        /*Vector3 currentRotation = transform.localRotation.eulerAngles;
-        currentRotation.y = Mathf.Clamp(currentRotation.y, -90.0f, 90.0f);
-        transform.localRotation = Quaternion.Euler(currentRotation);*/
 
     }
 }
