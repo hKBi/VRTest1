@@ -8,7 +8,7 @@ using Valve.VR.Extras;
 public class MoveCannon : MonoBehaviour
 {
     float speed = 10;
-    float firespeed = 10;
+    public float firespeed = 10;
     public GameObject bulletPrefab;
     public GameObject spawnPoint;
     private float nextFire;
