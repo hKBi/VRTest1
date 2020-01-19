@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Valve.VR.InteractionSystem;
 
 namespace UnityEngine.UI.Extensions
 {
@@ -12,6 +13,9 @@ namespace UnityEngine.UI.Extensions
         public GameObject cannon;
         public RadialSlider slider;
         float size;
+        public LinearMapping linearMapping;
+        private float currentLinearMapping = float.NaN;
+
         // Start is called before the first frame update
 
         private void Awake()
@@ -20,8 +24,31 @@ namespace UnityEngine.UI.Extensions
             moveCannon = bulletChanger.GetComponent<MoveCannon>();
             this.slider.onValueChanged.AddListener(this.ChangeBullet);
 
+            if (linearMapping == null)
+            {
+                linearMapping = GetComponent<LinearMapping>();
+            }
+
+            this.size = linearMapping.value;
+
             this.size = this.slider.Angle;
             
+        }
+
+        private void Update()
+        {
+            if (currentLinearMapping != linearMapping.value)
+            {
+                currentLinearMapping = linearMapping.value;
+                float delta = (currentLinearMapping + this.size * 2f);
+                moveCannon.bulletPrefab.transform.localScale = new Vector3(delta, delta, delta);
+                Debug.Log(moveCannon.bulletPrefab.transform.localScale);
+                moveCannon.firespeed =
+                moveCannon.firespeed = 15 - (currentLinearMapping + this.size * 10f);
+                Debug.Log(moveCannon.firespeed);
+
+                this.size = currentLinearMapping;
+            }
         }
 
 
