@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
+using Valve.VR;
 
 public class MoveTower : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class MoveTower : MonoBehaviour
             currentLinearMapping = linearMapping.value;
             float delta = currentLinearMapping - this.prevrotation;
             this.tower.transform.Rotate(Vector3.up * delta * 180);
-
+            
             this.prevrotation = currentLinearMapping;
         }
     }

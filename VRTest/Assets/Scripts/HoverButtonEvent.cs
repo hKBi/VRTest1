@@ -11,6 +11,7 @@ public class HoverButtonEvent : MonoBehaviour
     {
         GameObject hoverButton = GameObject.Find("Cannon");
         moveCannon = hoverButton.GetComponent<MoveCannon>();
+        
     }
     
     public void OnPressDrawPrediction(Hand hand)

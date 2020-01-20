@@ -18,6 +18,7 @@ public class MoveCannon : MonoBehaviour
     public Button draw;
     public Button fire;
     public SteamVR_LaserPointer laserPointer;
+    public Text firedCounter;
   
     // Start is called before the first frame update
 
@@ -57,8 +58,8 @@ public class MoveCannon : MonoBehaviour
             bullet.GetComponent<Rigidbody>().velocity = new Vector3(transform.up.x * firespeed, transform.up.y * firespeed, transform.up.z * firespeed);
            
             fired = fired + 1;
-            Debug.Log("feuert" + fired);
-            
+            //Debug.Log("feuert" + fired);
+            FiredCounterText();            
 
 
         }
@@ -111,5 +112,10 @@ public class MoveCannon : MonoBehaviour
             vel += gravity * timeDelta;
             pos += vel * timeDelta + (0.5f * gravity * timeDelta * timeDelta);
         }
+    }
+
+    void FiredCounterText()
+    {
+        firedCounter.text = "Fired: " + fired.ToString();
     }
 }

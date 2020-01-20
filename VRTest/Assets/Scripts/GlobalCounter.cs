@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GlobalCounter : MonoBehaviour
 {
     public int firecounter;
     int firecountertotal;
+    public Text counterText;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +24,15 @@ public class GlobalCounter : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             firecounter = firecounter + 1;
-            Debug.Log("getroffen" + firecounter);
-            
+
+            SetCountText();
         }
         
     }
+    void SetCountText ()
+    {
+        counterText.text = "Hit: " + firecounter.ToString();
+    }
+        
+
 }

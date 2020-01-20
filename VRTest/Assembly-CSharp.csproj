@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Destroy.cs" />
     <Compile Include="Assets\Scripts\GlobalCounter.cs" />
+    <Compile Include="Assets\Scripts\HapticFeedback.cs" />
     <Compile Include="Assets\Scripts\HoverButtonEvent.cs" />
     <Compile Include="Assets\Scripts\HoverButtonScript.cs" />
     <Compile Include="Assets\Scripts\MoveCannon.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\RotateCannon.cs" />
     <Compile Include="Assets\Scripts\RotationTreeDSlider.cs" />
+    <Compile Include="Assets\Scripts\SteamInitialation.cs" />
     <Compile Include="Assets\unity-ui-extensions\Examples\ComboBox\ComboBoxChanged.cs" />
     <Compile Include="Assets\unity-ui-extensions\Examples\Cooldown\CooldownEffect_Image.cs" />
     <Compile Include="Assets\unity-ui-extensions\Examples\Cooldown\CooldownEffect_SAUIM.cs" />
