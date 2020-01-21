@@ -15,6 +15,8 @@ namespace UnityEngine.UI.Extensions
         float size;
         public LinearMapping linearMapping;
         private float currentLinearMapping = float.NaN;
+        public Text bulletchangetext;
+        public Text bulletchangetext2d;
 
         // Start is called before the first frame update
 
@@ -46,6 +48,7 @@ namespace UnityEngine.UI.Extensions
                 moveCannon.firespeed =
                 moveCannon.firespeed = 15 - (currentLinearMapping + this.size * 10f);
                 Debug.Log(moveCannon.firespeed);
+                Changetext();
 
                 this.size = currentLinearMapping;
             }
@@ -62,6 +65,8 @@ namespace UnityEngine.UI.Extensions
             moveCannon.firespeed = 15 - ((changedSize + this.size * 10f)/1000);
             Debug.Log(moveCannon.firespeed);
 
+            ChangeText2d();
+
             this.size = changedSize;
 
 
@@ -77,6 +82,18 @@ namespace UnityEngine.UI.Extensions
                     firespeed = firespeed + 0.5f;
                 }
             }*/
+        }
+
+        void Changetext()
+        {
+            float textoutput = linearMapping.value * 100; 
+            bulletchangetext.text = "Value: " + textoutput.ToString();
+        }
+
+        void ChangeText2d()
+        {
+            float textouput = this.slider.Angle / 3.6f;
+            bulletchangetext2d.text = "Value: " + textouput.ToString();
         }
 
         
