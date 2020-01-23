@@ -58,11 +58,11 @@ namespace UnityEngine.UI.Extensions
 
         public void ChangeBullet(int changedSize)
         {
-            float delta = (changedSize + this.size * 0.2f)/1000;
+            float delta = (changedSize + this.size * 0.2f)/360;
             moveCannon.bulletPrefab.transform.localScale = new Vector3(delta, delta, delta);
             Debug.Log(moveCannon.bulletPrefab.transform.localScale);
             moveCannon.firespeed =
-            moveCannon.firespeed = 15 - ((changedSize + this.size * 10f)/1000);
+            moveCannon.firespeed = 15 - ((changedSize + this.size * 10f)/360);
             Debug.Log(moveCannon.firespeed);
 
             ChangeText2d();
