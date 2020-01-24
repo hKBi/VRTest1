@@ -14,7 +14,9 @@ namespace UnityEngine.UI.Extensions
         public RadialSlider slider;
         float size;
         public LinearMapping linearMapping;
+        public LinearMapping linearMapping2d;
         private float currentLinearMapping = float.NaN;
+        private float currentLinearMapping2d = float.NaN;
         public Text bulletchangetext;
         public Text bulletchangetext2d;
 
@@ -31,7 +33,13 @@ namespace UnityEngine.UI.Extensions
                 linearMapping = GetComponent<LinearMapping>();
             }
 
+            if (linearMapping2d == null)
+            {
+                linearMapping2d = GetComponent<LinearMapping>();
+            }
+
             this.size = linearMapping.value;
+            this.size = linearMapping2d.value;
 
             this.size = this.slider.Angle;
             
@@ -51,6 +59,19 @@ namespace UnityEngine.UI.Extensions
                 Changetext();
 
                 this.size = currentLinearMapping;
+            }
+            else if(currentLinearMapping2d != linearMapping2d.value)
+            {
+                currentLinearMapping2d = linearMapping2d.value;
+                float delta = (currentLinearMapping2d + this.size * 2f);
+                moveCannon.bulletPrefab.transform.localScale = new Vector3(delta, delta, delta);
+                Debug.Log(moveCannon.bulletPrefab.transform.localScale);
+                moveCannon.firespeed =
+                moveCannon.firespeed = 15 - (currentLinearMapping2d + this.size * 10f);
+                Debug.Log(moveCannon.firespeed);
+                ChangeText2d();
+
+                this.size = currentLinearMapping2d;
             }
         }
 
@@ -92,8 +113,11 @@ namespace UnityEngine.UI.Extensions
 
         void ChangeText2d()
         {
-            float textouput = this.slider.Angle / 3.6f;
-            bulletchangetext2d.text = "Value: " + textouput.ToString();
+            //float textouput = this.slider.Angle / 3.6f;
+            //bulletchangetext2d.text = "Value: " + textouput.ToString();
+
+            float textoutput = linearMapping2d.value * 100;
+            bulletchangetext2d.text = "Value: " + textoutput.ToString();
         }
 
         

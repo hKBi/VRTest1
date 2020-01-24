@@ -10,7 +10,9 @@ public class RotateCannon : MonoBehaviour
     public GameObject cannon;
     public Slider slider;
     public LinearMapping linearMapping;
+    public LinearMapping linearMapping2d;
     private float currentLinearMapping = float.NaN;
+    private float currentLinearMapping2d = float.NaN;
 
 
     float prevrotation;
@@ -26,7 +28,12 @@ public class RotateCannon : MonoBehaviour
         {
             linearMapping = GetComponent<LinearMapping>();
         }
+        else if (linearMapping2d == null)
+        {
+            linearMapping2d = GetComponent<LinearMapping>();
+        }
 
+        this.prevrotation = linearMapping2d.value;
         this.prevrotation = linearMapping.value;
         this.prevrotation = this.slider.value;
     }
@@ -40,6 +47,14 @@ public class RotateCannon : MonoBehaviour
             this.cannon.transform.Rotate(Vector3.back * delta * 20);
 
             this.prevrotation = currentLinearMapping;
+        }
+        else if(currentLinearMapping2d != linearMapping2d.value)
+        {
+            currentLinearMapping2d = linearMapping2d.value;
+            float delta = currentLinearMapping2d - this.prevrotation;
+            this.cannon.transform.Rotate(Vector3.back * delta * 20);
+
+            this.prevrotation = currentLinearMapping2d;
         }
     }
 
